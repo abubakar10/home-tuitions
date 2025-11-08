@@ -1,6 +1,6 @@
-# Home & Online Tutoring Classes Website
+# StudyPal - Home & Online Tutoring Classes Website
 
-A modern, fully animated React.js website for Home & Online Tutoring Classes based in Islamabad, Pakistan.
+A modern, fully animated React.js website for StudyPal - Quality home and online tutoring services in Islamabad, Pakistan.
 
 ## Features
 
@@ -115,5 +115,5 @@ The build creates optimized static files in the `dist` folder that can be deploy
 
 ## License
 
-This project is created for Home & Online Tutoring Classes.
+This project is created for StudyPal - studypal.com
 

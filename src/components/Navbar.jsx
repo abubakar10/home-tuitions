@@ -47,8 +47,7 @@ const Navbar = () => {
           whileTap={{ scale: 0.95 }}
         >
           <Link to="/" onClick={handleNavClick}>
-            <span className="logo-script">Home & Online</span>
-            <span className="logo-bold">TUTORING</span>
+            <span className="logo-bold">StudyPal</span>
           </Link>
         </motion.div>
 

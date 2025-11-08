@@ -65,7 +65,7 @@ const About = () => {
           >
             <h2>Who We Are</h2>
             <p>
-              Home & Online Tutoring Classes is a premier educational service provider based in Islamabad, 
+              StudyPal is a premier educational service provider based in Islamabad, 
               dedicated to helping students achieve academic excellence. We offer comprehensive tutoring 
               services for students from primary level through university, including specialized courses 
               in Web Development and support for O-Level and A-Level curricula.

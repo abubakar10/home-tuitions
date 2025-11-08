@@ -21,7 +21,7 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h3>Home & Online Tutoring</h3>
+          <h3>StudyPal</h3>
           <p>Quality education from primary to university level. Professional tutoring services in Islamabad and online worldwide.</p>
         </motion.div>
 
@@ -62,7 +62,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2024 Home & Online Tutoring Classes. All rights reserved.</p>
+        <p>&copy; 2024 StudyPal. All rights reserved.</p>
       </div>
     </footer>
   )
