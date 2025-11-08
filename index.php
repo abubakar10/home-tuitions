@@ -11,6 +11,26 @@ $requestPath = parse_url($requestUri, PHP_URL_PATH);
 // Remove query string
 $requestPath = strtok($requestPath, '?');
 
+// Handle favicon requests first
+if (preg_match('/^\/favicon\.(svg|ico|png)$/i', $requestPath)) {
+    $distFile = __DIR__ . '/dist' . $requestPath;
+    if (file_exists($distFile)) {
+        $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon',
+            'png' => 'image/png'
+        ];
+        
+        if (isset($mimeTypes[$ext])) {
+            header('Content-Type: ' . $mimeTypes[$ext]);
+        }
+        header('Cache-Control: public, max-age=31536000'); // Cache for 1 year
+        readfile($distFile);
+        exit;
+    }
+}
+
 // Check if it's a request for static assets
 if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $requestPath)) {
     // Try to serve from dist folder
