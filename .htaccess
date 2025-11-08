@@ -2,13 +2,27 @@
   RewriteEngine On
   RewriteBase /
   
-  # If dist folder exists, serve from there
+  # Serve static assets directly (don't rewrite)
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+  
+  # Serve files from dist/assets folder
+  RewriteCond %{REQUEST_URI} ^/assets/
+  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
+  RewriteRule ^assets/(.*)$ /dist/assets/$1 [L]
+  
+  # Serve other static files from dist
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
+  RewriteRule ^(.*)$ /dist/$1 [L]
+  
+  # For React Router - serve index.html for all other routes
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
   RewriteRule ^(.*)$ /dist/index.html [L]
   
-  # Fallback to index.php if dist doesn't exist
+  # Fallback to index.php
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ /index.php [L]

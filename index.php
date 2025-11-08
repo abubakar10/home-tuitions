@@ -11,13 +11,51 @@ $requestPath = parse_url($requestUri, PHP_URL_PATH);
 // Remove query string
 $requestPath = strtok($requestPath, '?');
 
-// If the file exists, serve it
-if ($requestPath !== '/' && file_exists(__DIR__ . $requestPath)) {
+// Check if it's a request for static assets
+if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $requestPath)) {
+    // Try to serve from dist folder
+    $distFile = __DIR__ . '/dist' . $requestPath;
+    if (file_exists($distFile)) {
+        // Set proper MIME types
+        $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'js' => 'application/javascript',
+            'css' => 'text/css',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon',
+            'woff' => 'font/woff',
+            'woff2' => 'font/woff2',
+            'ttf' => 'font/ttf',
+            'eot' => 'application/vnd.ms-fontobject'
+        ];
+        
+        if (isset($mimeTypes[$ext])) {
+            header('Content-Type: ' . $mimeTypes[$ext]);
+        }
+        
+        readfile($distFile);
+        exit;
+    }
+    // If file doesn't exist, return 404
+    http_response_code(404);
+    exit;
+}
+
+// If the file exists in dist, serve it
+if ($requestPath !== '/' && file_exists(__DIR__ . '/dist' . $requestPath)) {
     return false; // Let Apache handle it
 }
 
 // For all other routes, serve index.html (React Router)
+// Try dist folder first, then current directory
 $indexFile = __DIR__ . '/dist/index.html';
+if (!file_exists($indexFile)) {
+    $indexFile = __DIR__ . '/index.html';
+}
 
 if (file_exists($indexFile)) {
     // Read and output the index.html
