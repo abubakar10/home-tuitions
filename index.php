@@ -31,16 +31,14 @@ if (preg_match('/^\/favicon\.(svg|ico|png)$/i', $requestPath)) {
     }
 }
 
-// Check if it's a request for static assets
-if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $requestPath)) {
-    // Try to serve from dist folder
+// Handle assets folder requests (highest priority)
+if (preg_match('/^\/assets\//i', $requestPath)) {
     $distFile = __DIR__ . '/dist' . $requestPath;
     if (file_exists($distFile)) {
-        // Set proper MIME types
         $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
         $mimeTypes = [
-            'js' => 'application/javascript',
-            'css' => 'text/css',
+            'js' => 'application/javascript; charset=utf-8',
+            'css' => 'text/css; charset=utf-8',
             'png' => 'image/png',
             'jpg' => 'image/jpeg',
             'jpeg' => 'image/jpeg',
@@ -56,7 +54,40 @@ if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $re
         if (isset($mimeTypes[$ext])) {
             header('Content-Type: ' . $mimeTypes[$ext]);
         }
+        header('Cache-Control: public, max-age=31536000');
+        readfile($distFile);
+        exit;
+    }
+    http_response_code(404);
+    exit;
+}
+
+// Check if it's a request for static assets
+if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $requestPath)) {
+    // Try to serve from dist folder
+    $distFile = __DIR__ . '/dist' . $requestPath;
+    if (file_exists($distFile)) {
+        // Set proper MIME types
+        $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'js' => 'application/javascript; charset=utf-8',
+            'css' => 'text/css; charset=utf-8',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon',
+            'woff' => 'font/woff',
+            'woff2' => 'font/woff2',
+            'ttf' => 'font/ttf',
+            'eot' => 'application/vnd.ms-fontobject'
+        ];
         
+        if (isset($mimeTypes[$ext])) {
+            header('Content-Type: ' . $mimeTypes[$ext]);
+        }
+        header('Cache-Control: public, max-age=31536000');
         readfile($distFile);
         exit;
     }
