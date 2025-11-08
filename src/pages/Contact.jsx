@@ -13,34 +13,64 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
+    // Clear error message when user starts typing
+    if (errorMessage) setErrorMessage('')
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus(null)
+    setErrorMessage('')
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
+    try {
+      const response = await fetch('https://formspree.io/f/meovjgle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       })
-      
-      setTimeout(() => {
-        setSubmitStatus(null)
-      }, 3000)
-    }, 1500)
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        })
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus(null)
+        }, 5000)
+      } else {
+        const data = await response.json()
+        setSubmitStatus('error')
+        setErrorMessage(data.error || 'Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+      setErrorMessage('Network error. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -165,8 +195,7 @@ const Contact = () => {
               transition={{ duration: 0.8 }}
             >
               <h2>Send Us a Message</h2>
-              <form className="contact-form" action="https://formspree.io/f/meovjgle"
-                 method="POST" onSubmit={handleSubmit}>
+              <form className="contact-form" onSubmit={handleSubmit}>
                 <motion.div
                   className="form-group"
                   initial={{ opacity: 0, y: 20 }}
@@ -283,6 +312,16 @@ const Contact = () => {
                     animate={{ opacity: 1, scale: 1 }}
                   >
                     ✓ Message sent successfully! We'll get back to you soon.
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    className="error-message"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                  >
+                    ✗ {errorMessage || 'Failed to send message. Please try again.'}
                   </motion.div>
                 )}
               </form>

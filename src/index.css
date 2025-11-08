@@ -18,6 +18,25 @@ body {
   background-color: var(--dark-purple);
   color: var(--white);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Touch-friendly elements */
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Prevent text size adjustment on iOS */
+@media screen and (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
 }
 
 html {

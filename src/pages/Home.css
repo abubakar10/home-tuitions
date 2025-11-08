@@ -346,5 +346,113 @@
   .features-grid {
     grid-template-columns: 1fr;
   }
+
+  .hero-content {
+    gap: 2rem;
+  }
+
+  .hero-description,
+  .hero-location {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.9rem 2rem;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .phone-number {
+    font-size: 1.1rem;
+  }
+
+  .features-section {
+    padding: 3rem 1rem;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding-top: 70px;
+  }
+
+  .hero-banner {
+    padding: 1.5rem 1rem;
+  }
+
+  .script-text {
+    font-size: 1.5rem;
+  }
+
+  .bold-text {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .highlight-text {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-description,
+  .hero-location {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .image-frame {
+    width: 250px;
+    height: 250px;
+    border-width: 6px;
+  }
+
+  .tutor-avatar,
+  .student-avatar {
+    font-size: 3rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  .phone-icon {
+    font-size: 1.2rem;
+  }
+
+  .phone-number {
+    font-size: 1rem;
+  }
+
+  .features-section {
+    padding: 2rem 1rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 1.2rem;
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.2rem;
+  }
 }
 
