@@ -91,6 +91,28 @@ home-tuitions-website/
 - Phone: 0319-1773707
 - Location: Islamabad, Pakistan
 
+## Deployment
+
+The project is ready for deployment! See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
+### Quick Deploy Options:
+
+**Vercel (Recommended):**
+1. Go to [vercel.com](https://vercel.com)
+2. Import your GitHub repository
+3. Deploy automatically!
+
+**Netlify:**
+1. Go to [netlify.com](https://netlify.com)
+2. Import your GitHub repository
+3. Deploy automatically!
+
+**GitHub Pages:**
+- The repository includes GitHub Actions workflow for automatic deployment
+- Enable GitHub Pages in repository settings
+
+The build creates optimized static files in the `dist` folder that can be deployed to any static hosting service.
+
 ## License
 
 This project is created for Home & Online Tutoring Classes.
