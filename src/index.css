@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-purple: #4a148c;
+  --dark-purple: #2d0a4f;
+  --bright-yellow: #ffd700;
+  --gold-yellow: #ffc107;
+  --white: #ffffff;
+  --text-light: rgba(255, 255, 255, 0.9);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--dark-purple);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-purple);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bright-yellow);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-yellow);
+}
+
