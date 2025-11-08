@@ -12,8 +12,10 @@ dist
 dist-ssr
 *.local
 
-# Keep .htaccess for deployment
+# Keep .htaccess and deployment files for Hostinger
 !.htaccess
+!index.php
+!composer.json
 
 # Editor directories and files
 .vscode/*

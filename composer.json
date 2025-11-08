@@ -1,0 +1,12 @@
+{
+  "name": "home-tuitions/website",
+  "description": "Home & Online Tutoring Classes Website",
+  "type": "project",
+  "require": {},
+  "scripts": {
+    "post-install-cmd": [
+      "echo 'React app deployment - dist folder should be committed to Git'"
+    ]
+  }
+}
+
