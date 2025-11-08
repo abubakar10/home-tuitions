@@ -1,0 +1,9 @@
+# Force line endings
+* text=auto
+
+# Ensure .htaccess is treated as text
+.htaccess text
+
+# Ensure dist files are included when forced
+dist/* text
+
