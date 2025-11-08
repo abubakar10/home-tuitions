@@ -11,6 +11,48 @@ $requestPath = parse_url($requestUri, PHP_URL_PATH);
 // Remove query string
 $requestPath = strtok($requestPath, '?');
 
+// CRITICAL: Handle assets FIRST - before anything else
+// This prevents assets from being served as HTML
+if (preg_match('/^\/assets\//i', $requestPath)) {
+    $distFile = __DIR__ . '/dist' . $requestPath;
+    if (file_exists($distFile)) {
+        $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'js' => 'application/javascript; charset=utf-8',
+            'mjs' => 'application/javascript; charset=utf-8',
+            'css' => 'text/css; charset=utf-8',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon',
+            'woff' => 'font/woff',
+            'woff2' => 'font/woff2',
+            'ttf' => 'font/ttf',
+            'eot' => 'application/vnd.ms-fontobject'
+        ];
+        
+        if (isset($mimeTypes[$ext])) {
+            header('Content-Type: ' . $mimeTypes[$ext]);
+        } else {
+            // Default for JS
+            if ($ext === 'js' || $ext === 'mjs') {
+                header('Content-Type: application/javascript; charset=utf-8');
+            }
+        }
+        header('Cache-Control: public, max-age=31536000');
+        header('X-Content-Type-Options: nosniff');
+        readfile($distFile);
+        exit;
+    }
+    // If file doesn't exist, return 404
+    http_response_code(404);
+    header('Content-Type: text/plain');
+    echo 'Asset not found';
+    exit;
+}
+
 // Handle favicon requests first
 if (preg_match('/^\/favicon\.(svg|ico|png)$/i', $requestPath)) {
     $distFile = __DIR__ . '/dist' . $requestPath;
@@ -31,38 +73,7 @@ if (preg_match('/^\/favicon\.(svg|ico|png)$/i', $requestPath)) {
     }
 }
 
-// Handle assets folder requests (highest priority)
-if (preg_match('/^\/assets\//i', $requestPath)) {
-    $distFile = __DIR__ . '/dist' . $requestPath;
-    if (file_exists($distFile)) {
-        $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
-        $mimeTypes = [
-            'js' => 'application/javascript; charset=utf-8',
-            'css' => 'text/css; charset=utf-8',
-            'png' => 'image/png',
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'gif' => 'image/gif',
-            'svg' => 'image/svg+xml',
-            'ico' => 'image/x-icon',
-            'woff' => 'font/woff',
-            'woff2' => 'font/woff2',
-            'ttf' => 'font/ttf',
-            'eot' => 'application/vnd.ms-fontobject'
-        ];
-        
-        if (isset($mimeTypes[$ext])) {
-            header('Content-Type: ' . $mimeTypes[$ext]);
-        }
-        header('Cache-Control: public, max-age=31536000');
-        readfile($distFile);
-        exit;
-    }
-    http_response_code(404);
-    exit;
-}
-
-// Check if it's a request for static assets
+// Check if it's a request for static assets (other than assets folder)
 if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $requestPath)) {
     // Try to serve from dist folder
     $distFile = __DIR__ . '/dist' . $requestPath;

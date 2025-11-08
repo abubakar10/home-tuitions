@@ -2,35 +2,45 @@
   RewriteEngine On
   RewriteBase /
   
-  # Priority 1: Serve actual files that exist (don't rewrite)
+  # CRITICAL: Serve assets from dist/assets FIRST - before anything else
+  RewriteCond %{REQUEST_URI} ^/assets/
+  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
+  RewriteRule ^assets/(.*)$ /dist/assets/$1 [L]
+  
+  # Serve favicon from dist
+  RewriteCond %{REQUEST_URI} ^/favicon\.(svg|ico|png)$
+  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
+  RewriteRule ^favicon\.(svg|ico|png)$ /dist/favicon.$1 [L]
+  
+  # Serve actual files that exist (don't rewrite)
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
   
-  # Priority 2: Serve assets from dist/assets (most important - must come first)
-  RewriteCond %{REQUEST_URI} ^/assets/
-  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
-  RewriteRule ^assets/(.*)$ /dist/assets/$1 [L,QSA]
-  
-  # Priority 3: Serve favicon from dist
-  RewriteCond %{REQUEST_URI} ^/favicon\.(svg|ico|png)$
-  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
-  RewriteRule ^favicon\.(svg|ico|png)$ /dist/favicon.$1 [L,QSA]
-  
-  # Priority 4: Serve other static files from dist
+  # Serve other static files from dist
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
-  RewriteRule ^(.*)$ /dist/$1 [L,QSA]
+  RewriteRule ^(.*)$ /dist/$1 [L]
   
-  # Priority 5: For React Router - serve index.html for all other routes
+  # For React Router - serve index.html for all other routes (but NOT for assets)
+  RewriteCond %{REQUEST_URI} !^/assets/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
-  RewriteRule ^(.*)$ /dist/index.html [L,QSA]
+  RewriteRule ^(.*)$ /dist/index.html [L]
   
-  # Priority 6: Fallback to index.php
+  # Fallback to index.php (but NOT for assets)
+  RewriteCond %{REQUEST_URI} !^/assets/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ /index.php [L,QSA]
+  RewriteRule ^(.*)$ /index.php [L]
+</IfModule>
+
+# Force correct MIME types for JavaScript and CSS
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType application/javascript .mjs
+  AddType text/css .css
+  AddType image/svg+xml .svg
 </IfModule>
 
 # Enable compression
