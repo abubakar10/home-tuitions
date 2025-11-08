@@ -165,8 +165,8 @@ const Contact = () => {
               transition={{ duration: 0.8 }}
             >
               <h2>Send Us a Message</h2>
-              <form className="contact-form" action="https://formspree.io/f/mrbrzqpj"
-               method="POST" onSubmit={handleSubmit}>
+              <form className="contact-form" action="https://formspree.io/f/meovjgle"
+                 method="POST" onSubmit={handleSubmit}>
                 <motion.div
                   className="form-group"
                   initial={{ opacity: 0, y: 20 }}
