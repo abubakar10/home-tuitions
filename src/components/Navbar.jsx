@@ -24,6 +24,15 @@ const Navbar = () => {
     { path: '/contact', label: 'Contact' },
   ]
 
+  const handleNavClick = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <motion.nav
       className={`navbar ${isScrolled ? 'scrolled' : ''}`}
@@ -37,7 +46,7 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Link to="/">
+          <Link to="/" onClick={handleNavClick}>
             <span className="logo-script">Home & Online</span>
             <span className="logo-bold">TUTORING</span>
           </Link>
@@ -49,6 +58,7 @@ const Navbar = () => {
               <Link
                 to={link.path}
                 className={location.pathname === link.path ? 'active' : ''}
+                onClick={handleNavClick}
               >
                 {link.label}
               </Link>
@@ -79,7 +89,7 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick}
                 className={location.pathname === link.path ? 'active' : ''}
               >
                 {link.label}

@@ -3,6 +3,14 @@ import { motion } from 'framer-motion'
 import './Footer.css'
 
 const Footer = () => {
+  const handleLinkClick = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -26,11 +34,11 @@ const Footer = () => {
         >
           <h4>Quick Links</h4>
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/services">Services</Link></li>
-            <li><Link to="/testimonials">Testimonials</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
+            <li><Link to="/about" onClick={handleLinkClick}>About</Link></li>
+            <li><Link to="/services" onClick={handleLinkClick}>Services</Link></li>
+            <li><Link to="/testimonials" onClick={handleLinkClick}>Testimonials</Link></li>
+            <li><Link to="/contact" onClick={handleLinkClick}>Contact</Link></li>
           </ul>
         </motion.div>
 

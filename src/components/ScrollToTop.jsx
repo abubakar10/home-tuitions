@@ -6,10 +6,13 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     // Scroll to top when route changes
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
     })
   }, [pathname])
 

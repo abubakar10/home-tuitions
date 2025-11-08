@@ -1,5 +1,8 @@
 .home-page {
   padding-top: 80px;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* Hero Banner */
@@ -56,6 +59,16 @@
   align-items: center;
   position: relative;
   z-index: 2;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+@media (max-width: 968px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0;
+  }
 }
 
 .hero-text {
@@ -238,6 +251,9 @@
 .features-section {
   padding: 5rem 2rem;
   background: var(--dark-purple);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .section-title {
@@ -257,8 +273,15 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .feature-card {

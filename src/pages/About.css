@@ -1,6 +1,9 @@
 .about-page {
   padding-top: 80px;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .about-hero {
@@ -51,11 +54,17 @@
 .about-content {
   padding: 4rem 2rem;
   background: var(--dark-purple);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .about-intro {
@@ -85,6 +94,13 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   margin: 4rem 0;
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .stat-card {
@@ -120,6 +136,13 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin: 4rem 0;
+}
+
+@media (max-width: 768px) {
+  .values-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .value-card {
@@ -242,7 +265,7 @@
   }
 
   .stats-section {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
@@ -306,6 +329,7 @@
   .stats-section {
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin: 2rem 0;
   }
 
   .stat-card {

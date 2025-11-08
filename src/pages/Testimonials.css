@@ -1,6 +1,9 @@
 .testimonials-page {
   padding-top: 80px;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .testimonials-hero {
@@ -51,6 +54,9 @@
 .testimonials-content {
   padding: 4rem 2rem;
   background: var(--dark-purple);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .achievements-section {
@@ -61,6 +67,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .achievement-card {
@@ -239,6 +252,13 @@
   gap: 2rem;
 }
 
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 .gallery-item {
   background: rgba(255, 255, 255, 0.05);
   padding: 2.5rem;
@@ -376,7 +396,11 @@
     right: -50px;
   }
 
-  .achievements-grid,
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -468,8 +492,8 @@
   }
 
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .gallery-item {
