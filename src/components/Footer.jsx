@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPhone, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa'
 import './Footer.css'
 
 const Footer = () => {
@@ -54,6 +54,10 @@ const Footer = () => {
           <p>
             <span className="icon"><FaPhone /></span>
             <a href="tel:03191773707">0319-1773707</a>
+          </p>
+          <p>
+            <span className="icon"><FaEnvelope /></span>
+            <a href="mailto:abubakarr1011@gmail.com">abubakarr1011@gmail.com</a>
           </p>
           <p>
             <span className="icon"><FaMapMarkerAlt /></span>
