@@ -1,46 +1,47 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { FaGraduationCap, FaBook, FaAward, FaUniversity, FaLaptopCode, FaGlobe, FaHome, FaUsers, FaChalkboardTeacher } from 'react-icons/fa'
 import './Services.css'
 
 const Services = () => {
   const services = [
     {
-      icon: '🎓',
+      icon: FaGraduationCap,
       title: 'Primary Education',
       description: 'Comprehensive tutoring for primary school students covering all core subjects including Mathematics, English, Science, and more.',
       features: ['Personalized learning plans', 'Interactive sessions', 'Progress tracking', 'Homework support'],
       color: '#ff6b6b'
     },
     {
-      icon: '📚',
+      icon: FaBook,
       title: 'Secondary Education',
       description: 'Expert guidance for secondary level students with focus on exam preparation and concept building.',
       features: ['Exam preparation', 'Concept clarity', 'Regular assessments', 'Study materials'],
       color: '#4ecdc4'
     },
     {
-      icon: '🎯',
+      icon: FaAward,
       title: 'O-Level & A-Level',
       description: 'Specialized tutoring for Cambridge O-Level and A-Level curricula with experienced tutors.',
       features: ['Cambridge curriculum', 'Past paper practice', 'Exam strategies', 'Subject specialization'],
       color: '#ffe66d'
     },
     {
-      icon: '🏛️',
+      icon: FaUniversity,
       title: 'University Level',
       description: 'Advanced tutoring for university students across various disciplines and courses.',
       features: ['Advanced concepts', 'Assignment help', 'Research support', 'Exam preparation'],
       color: '#a8e6cf'
     },
     {
-      icon: '💻',
+      icon: FaLaptopCode,
       title: 'Web Development',
       description: 'Professional web development courses covering frontend, backend, and full-stack development.',
       features: ['HTML, CSS, JavaScript', 'React, Node.js', 'Database management', 'Project-based learning'],
       color: '#ff8b94'
     },
     {
-      icon: '🌐',
+      icon: FaGlobe,
       title: 'Online Tutoring',
       description: 'Flexible online tutoring sessions available worldwide with interactive virtual classrooms.',
       features: ['Live sessions', 'Recorded lectures', 'Digital resources', 'Flexible timing'],
@@ -52,19 +53,19 @@ const Services = () => {
     {
       title: 'Home Tutoring',
       description: 'One-on-one personalized sessions at your home in Islamabad',
-      icon: '🏠',
+      icon: FaHome,
       available: 'Available throughout Islamabad'
     },
     {
       title: 'Online Tutoring',
       description: 'Virtual learning sessions from anywhere in the world',
-      icon: '💻',
+      icon: FaLaptopCode,
       available: 'Available worldwide'
     },
     {
       title: 'Group Sessions',
       description: 'Small group classes for collaborative learning',
-      icon: '👥',
+      icon: FaUsers,
       available: '2-5 students per group'
     },
   ]
@@ -117,7 +118,9 @@ const Services = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -10 }}
                 >
-                  <div className="type-icon">{type.icon}</div>
+                  <div className="type-icon">
+                    {type.icon && <type.icon />}
+                  </div>
                   <h3>{type.title}</h3>
                   <p>{type.description}</p>
                   <span className="availability">{type.available}</span>
@@ -150,7 +153,9 @@ const Services = () => {
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <div className="service-icon">{service.icon}</div>
+                    <div className="service-icon">
+                      {service.icon && <service.icon />}
+                    </div>
                   </motion.div>
                   <h3>{service.title}</h3>
                   <p className="service-description">{service.description}</p>

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { FaBullseye, FaEye, FaGem } from 'react-icons/fa'
 import './About.css'
 
 const About = () => {
@@ -11,17 +12,17 @@ const About = () => {
 
   const values = [
     {
-      icon: '🎯',
+      icon: FaBullseye,
       title: 'Our Mission',
       description: 'To provide quality education that empowers students to achieve their academic goals and excel in their chosen fields.'
     },
     {
-      icon: '👁️',
+      icon: FaEye,
       title: 'Our Vision',
       description: 'To become the leading tutoring service in Islamabad, known for excellence, innovation, and student success.'
     },
     {
-      icon: '💎',
+      icon: FaGem,
       title: 'Our Values',
       description: 'We believe in personalized learning, dedication, integrity, and creating a supportive environment for every student.'
     },
@@ -65,7 +66,7 @@ const About = () => {
           >
             <h2>Who We Are</h2>
             <p>
-              StudyPal is a premier educational service provider based in Islamabad, 
+              StudPal is a premier educational service provider based in Islamabad, 
               dedicated to helping students achieve academic excellence. We offer comprehensive tutoring 
               services for students from primary level through university, including specialized courses 
               in Web Development and support for O-Level and A-Level curricula.
@@ -102,21 +103,26 @@ const About = () => {
           </motion.div>
 
           <div className="values-section">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                className="value-card"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
-              >
-                <div className="value-icon">{value.icon}</div>
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
-              </motion.div>
-            ))}
+            {values.map((value, index) => {
+              const IconComponent = value.icon;
+              return (
+                <motion.div
+                  key={index}
+                  className="value-card"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                >
+                  <div className="value-icon">
+                    {IconComponent && <IconComponent />}
+                  </div>
+                  <h3>{value.title}</h3>
+                  <p>{value.description}</p>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { FaPhone, FaMapMarkerAlt, FaClock, FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import './Contact.css'
 
 const Contact = () => {
@@ -75,19 +76,19 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: '📞',
+      icon: FaPhone,
       title: 'Phone',
       content: '0319-1773707',
       link: 'tel:03191773707',
     },
     {
-      icon: '📍',
+      icon: FaMapMarkerAlt,
       title: 'Location',
       content: 'Islamabad, Pakistan',
       link: null,
     },
     {
-      icon: '⏰',
+      icon: FaClock,
       title: 'Available',
       content: 'Mon - Sat: 9:00 AM - 8:00 PM',
       link: null,
@@ -148,7 +149,9 @@ const Contact = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
                   >
-                    <div className="contact-icon">{info.icon}</div>
+                    <div className="contact-icon">
+                      {info.icon && <info.icon />}
+                    </div>
                     <h3>{info.title}</h3>
                     {info.link ? (
                       <a href={info.link}>{info.content}</a>
@@ -164,24 +167,27 @@ const Contact = () => {
                 <div className="social-icons">
                   <motion.a
                     href="#"
+                    aria-label="Facebook"
                     whileHover={{ scale: 1.2, rotate: 10 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    📘
+                    <FaFacebook />
                   </motion.a>
                   <motion.a
                     href="#"
+                    aria-label="Instagram"
                     whileHover={{ scale: 1.2, rotate: 10 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    📷
+                    <FaInstagram />
                   </motion.a>
                   <motion.a
                     href="#"
+                    aria-label="Twitter"
                     whileHover={{ scale: 1.2, rotate: 10 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    🐦
+                    <FaTwitter />
                   </motion.a>
                 </div>
               </div>

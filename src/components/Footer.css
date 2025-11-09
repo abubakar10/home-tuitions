@@ -61,6 +61,14 @@
 
 .footer-section .icon {
   margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--bright-yellow);
+}
+
+.footer-section .icon svg {
+  width: 1.2em;
+  height: 1.2em;
 }
 
 .footer-bottom {

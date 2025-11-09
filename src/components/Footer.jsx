@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import './Footer.css'
 
 const Footer = () => {
@@ -21,7 +22,7 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h3>StudyPal</h3>
+          <h3>StudPal</h3>
           <p>Quality education from primary to university level. Professional tutoring services in Islamabad and online worldwide.</p>
         </motion.div>
 
@@ -51,18 +52,18 @@ const Footer = () => {
         >
           <h4>Contact Info</h4>
           <p>
-            <span className="icon">📞</span>
+            <span className="icon"><FaPhone /></span>
             <a href="tel:03191773707">0319-1773707</a>
           </p>
           <p>
-            <span className="icon">📍</span>
+            <span className="icon"><FaMapMarkerAlt /></span>
             Islamabad, Pakistan
           </p>
         </motion.div>
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2024 StudyPal. All rights reserved.</p>
+        <p>&copy; 2024 StudPal. All rights reserved.</p>
       </div>
     </footer>
   )

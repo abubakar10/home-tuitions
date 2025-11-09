@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { FaPhone, FaGraduationCap, FaBook, FaLaptopCode, FaGlobe, FaStar, FaMapMarkerAlt, FaChalkboardTeacher, FaUserGraduate, FaUserTie } from 'react-icons/fa'
 import './Home.css'
 
 const Home = () => {
@@ -53,7 +54,7 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="script-text">Welcome to</span>
-              <span className="bold-text">StudyPal</span>
+              <span className="bold-text">StudPal</span>
               <span className="highlight-text">TUTORING</span>
             </motion.h1>
 
@@ -99,7 +100,7 @@ const Home = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 1.3 }}
             >
-              <span className="phone-icon">📞</span>
+              <span className="phone-icon"><FaPhone /></span>
               <a href="tel:03191773707" className="phone-number">0319-1773707</a>
             </motion.div>
 
@@ -137,8 +138,8 @@ const Home = () => {
               />
               <div className="image-placeholder">
                 <div className="tutor-image">
-                  <div className="tutor-avatar">👩‍🏫</div>
-                  <div className="student-avatar">👧</div>
+                  <div className="tutor-avatar"><FaChalkboardTeacher /></div>
+                  <div className="student-avatar"><FaUserGraduate /></div>
                 </div>
               </div>
             </div>
@@ -160,27 +161,32 @@ const Home = () => {
 
         <div className="features-grid">
           {[
-            { icon: '🎓', title: 'Expert Tutors', desc: 'Qualified and experienced educators' },
-            { icon: '📚', title: 'All Levels', desc: 'Primary to University level' },
-            { icon: '💻', title: 'Web Development', desc: 'Professional coding courses' },
-            { icon: '🌐', title: 'Online & Home', desc: 'Flexible learning options' },
-            { icon: '⭐', title: 'O & A Levels', desc: 'Specialized curriculum support' },
-            { icon: '📍', title: 'Islamabad Wide', desc: 'Available throughout the city' },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              className="feature-card"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -10 }}
-            >
-              <div className="feature-icon">{feature.icon}</div>
-              <h3>{feature.title}</h3>
-              <p>{feature.desc}</p>
-            </motion.div>
-          ))}
+            { icon: FaChalkboardTeacher, title: 'Expert Tutors', desc: 'Qualified and experienced educators' },
+            { icon: FaBook, title: 'All Levels', desc: 'Primary to University level' },
+            { icon: FaLaptopCode, title: 'Web Development', desc: 'Professional coding courses' },
+            { icon: FaGlobe, title: 'Online & Home', desc: 'Flexible learning options' },
+            { icon: FaStar, title: 'O & A Levels', desc: 'Specialized curriculum support' },
+            { icon: FaMapMarkerAlt, title: 'Islamabad Wide', desc: 'Available throughout the city' },
+          ].map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <motion.div
+                key={index}
+                className="feature-card"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -10 }}
+              >
+                <div className="feature-icon">
+                  {IconComponent && <IconComponent />}
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
     </div>

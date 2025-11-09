@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FaGraduationCap, FaUserGraduate, FaUserTie, FaUser, FaSmile, FaStar, FaChalkboardTeacher, FaBook, FaLaptopCode, FaPencilAlt, FaBullseye, FaTrophy } from 'react-icons/fa'
 import './Testimonials.css'
 
 const Testimonials = () => {
@@ -9,7 +10,7 @@ const Testimonials = () => {
     {
       name: 'Ahmed Ali',
       role: 'A-Level Student',
-      image: '👨‍🎓',
+      image: FaUserGraduate,
       rating: 5,
       text: 'The tutoring sessions have been incredibly helpful. My grades have improved significantly, and the tutors are very patient and understanding. Highly recommend!',
       subject: 'Mathematics & Physics'
@@ -17,7 +18,7 @@ const Testimonials = () => {
     {
       name: 'Fatima Khan',
       role: 'O-Level Student',
-      image: '👩‍🎓',
+      image: FaUserGraduate,
       rating: 5,
       text: 'I was struggling with Chemistry, but after joining these classes, I feel much more confident. The online sessions are very convenient and the teaching quality is excellent.',
       subject: 'Chemistry'
@@ -25,7 +26,7 @@ const Testimonials = () => {
     {
       name: 'Hassan Malik',
       role: 'University Student',
-      image: '👨‍💼',
+      image: FaUserTie,
       rating: 5,
       text: 'The Web Development course is comprehensive and well-structured. The instructor explains complex concepts in a simple way. I\'ve learned so much in just a few months!',
       subject: 'Web Development'
@@ -33,7 +34,7 @@ const Testimonials = () => {
     {
       name: 'Ayesha Ahmed',
       role: 'Parent',
-      image: '👩',
+      image: FaUser,
       rating: 5,
       text: 'My daughter\'s performance has improved dramatically since she started home tutoring. The tutor is professional, punctual, and really cares about the student\'s progress.',
       subject: 'Primary Education'
@@ -41,7 +42,7 @@ const Testimonials = () => {
     {
       name: 'Bilal Shah',
       role: 'Secondary Student',
-      image: '🧑‍🎓',
+      image: FaUserGraduate,
       rating: 5,
       text: 'The flexible scheduling and personalized attention make these classes perfect for me. The tutors are knowledgeable and always ready to help. Great experience overall!',
       subject: 'Multiple Subjects'
@@ -49,10 +50,10 @@ const Testimonials = () => {
   ]
 
   const achievements = [
-    { number: '500+', label: 'Happy Students', icon: '😊' },
-    { number: '95%', label: 'Success Rate', icon: '⭐' },
-    { number: '50+', label: 'Expert Tutors', icon: '👨‍🏫' },
-    { number: '10+', label: 'Years Experience', icon: '🎓' },
+    { number: '500+', label: 'Happy Students', icon: FaSmile },
+    { number: '95%', label: 'Success Rate', icon: FaStar },
+    { number: '50+', label: 'Expert Tutors', icon: FaChalkboardTeacher },
+    { number: '10+', label: 'Years Experience', icon: FaGraduationCap },
   ]
 
   const nextTestimonial = () => {
@@ -110,7 +111,9 @@ const Testimonials = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.1, y: -10 }}
                 >
-                  <div className="achievement-icon">{achievement.icon}</div>
+                  <div className="achievement-icon">
+                    {achievement.icon && <achievement.icon />}
+                  </div>
                   <div className="achievement-number">{achievement.number}</div>
                   <div className="achievement-label">{achievement.label}</div>
                 </motion.div>
@@ -141,8 +144,13 @@ const Testimonials = () => {
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="testimonial-header">
-                    <div className="testimonial-avatar">{testimonials[activeTestimonial].image}</div>
+                    <div className="testimonial-header">
+                      <div className="testimonial-avatar">
+                        {testimonials[activeTestimonial].image && (() => {
+                          const IconComponent = testimonials[activeTestimonial].image;
+                          return <IconComponent />;
+                        })()}
+                      </div>
                     <div className="testimonial-info">
                       <h3>{testimonials[activeTestimonial].name}</h3>
                       <p className="testimonial-role">{testimonials[activeTestimonial].role}</p>
@@ -152,7 +160,7 @@ const Testimonials = () => {
                   
                   <div className="testimonial-rating">
                     {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                      <span key={i}>⭐</span>
+                      <span key={i}><FaStar /></span>
                     ))}
                   </div>
 
@@ -186,12 +194,12 @@ const Testimonials = () => {
             <h2 className="section-title">Learning Moments</h2>
             <div className="gallery-grid">
               {[
-                { emoji: '📚', label: 'Study Sessions' },
-                { emoji: '💻', label: 'Online Classes' },
-                { emoji: '✏️', label: 'Practice Time' },
-                { emoji: '🎯', label: 'Exam Prep' },
-                { emoji: '👨‍🏫', label: 'Expert Guidance' },
-                { emoji: '🏆', label: 'Achievements' },
+                { emoji: FaBook, label: 'Study Sessions' },
+                { emoji: FaLaptopCode, label: 'Online Classes' },
+                { emoji: FaPencilAlt, label: 'Practice Time' },
+                { emoji: FaBullseye, label: 'Exam Prep' },
+                { emoji: FaChalkboardTeacher, label: 'Expert Guidance' },
+                { emoji: FaTrophy, label: 'Achievements' },
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -202,7 +210,9 @@ const Testimonials = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <div className="gallery-emoji">{item.emoji}</div>
+                  <div className="gallery-emoji">
+                    {item.emoji && <item.emoji />}
+                  </div>
                   <div className="gallery-label">{item.label}</div>
                 </motion.div>
               ))}

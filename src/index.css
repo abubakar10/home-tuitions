@@ -5,17 +5,22 @@
 }
 
 :root {
-  --primary-purple: #4a148c;
-  --dark-purple: #2d0a4f;
+  --primary-purple: #6b46c1;
+  --dark-purple: #1e1b4b;
+  --light-purple: #8b5cf6;
   --bright-yellow: #ffd700;
   --gold-yellow: #ffc107;
   --white: #ffffff;
   --text-light: rgba(255, 255, 255, 0.9);
+  --bg-dark: #0f172a;
+  --bg-card: rgba(30, 27, 75, 0.6);
+  --accent-blue: #3b82f6;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--dark-purple);
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--dark-purple) 100%);
+  background-attachment: fixed;
   color: var(--white);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;

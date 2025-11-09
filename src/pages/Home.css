@@ -168,6 +168,15 @@
 
 .phone-icon {
   font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bright-yellow);
+}
+
+.phone-icon svg {
+  width: 1.2em;
+  height: 1.2em;
 }
 
 .phone-number {
@@ -231,7 +240,17 @@
 .tutor-avatar,
 .student-avatar {
   font-size: 4rem;
+  color: var(--bright-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: float 3s ease-in-out infinite;
+}
+
+.tutor-avatar svg,
+.student-avatar svg {
+  width: 100%;
+  height: 100%;
 }
 
 .student-avatar {
@@ -302,8 +321,16 @@
 .feature-icon {
   font-size: 4rem;
   margin-bottom: 1rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bright-yellow);
   animation: bounce 2s ease-in-out infinite;
+}
+
+.feature-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes bounce {

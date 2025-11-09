@@ -57,6 +57,7 @@
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .container {
@@ -73,7 +74,10 @@
   gap: 4rem;
   align-items: start;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 968px) {
@@ -122,6 +126,15 @@
 .contact-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: var(--bright-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .contact-card h3 {
@@ -161,8 +174,20 @@
 .social-icons a {
   font-size: 2rem;
   text-decoration: none;
-  display: inline-block;
-  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bright-yellow);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: var(--gold-yellow);
+}
+
+.social-icons a svg {
+  width: 100%;
+  height: 100%;
 }
 
 .contact-form-wrapper {
@@ -340,6 +365,25 @@
 
   .contact-content {
     padding: 2rem 1rem;
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 1rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contact-grid {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
   }
 
   .contact-info h2,
