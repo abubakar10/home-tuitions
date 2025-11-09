@@ -13,8 +13,17 @@ $requestPath = strtok($requestPath, '?');
 
 // CRITICAL: Handle assets FIRST - before anything else
 // This prevents assets from being served as HTML
-if (preg_match('/^\/assets\//i', $requestPath)) {
-    $distFile = __DIR__ . '/dist' . $requestPath;
+// Handle both /assets/ and assets/ paths
+if (preg_match('/^\/?assets\//i', $requestPath)) {
+    // Normalize the path
+    $normalizedPath = ltrim($requestPath, '/');
+    $distFile = __DIR__ . '/dist/' . $normalizedPath;
+    
+    // Also try with leading slash
+    if (!file_exists($distFile)) {
+        $distFile = __DIR__ . '/dist' . $requestPath;
+    }
+    
     if (file_exists($distFile)) {
         $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
         $mimeTypes = [
@@ -54,8 +63,14 @@ if (preg_match('/^\/assets\//i', $requestPath)) {
 }
 
 // Handle favicon requests first
-if (preg_match('/^\/favicon\.(svg|ico|png)$/i', $requestPath)) {
-    $distFile = __DIR__ . '/dist' . $requestPath;
+if (preg_match('/^\/?favicon\.(svg|ico|png)$/i', $requestPath)) {
+    $normalizedPath = ltrim($requestPath, '/');
+    $distFile = __DIR__ . '/dist/' . $normalizedPath;
+    
+    if (!file_exists($distFile)) {
+        $distFile = __DIR__ . '/dist' . $requestPath;
+    }
+    
     if (file_exists($distFile)) {
         $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
         $mimeTypes = [
@@ -76,7 +91,13 @@ if (preg_match('/^\/favicon\.(svg|ico|png)$/i', $requestPath)) {
 // Check if it's a request for static assets (other than assets folder)
 if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $requestPath)) {
     // Try to serve from dist folder
-    $distFile = __DIR__ . '/dist' . $requestPath;
+    $normalizedPath = ltrim($requestPath, '/');
+    $distFile = __DIR__ . '/dist/' . $normalizedPath;
+    
+    if (!file_exists($distFile)) {
+        $distFile = __DIR__ . '/dist' . $requestPath;
+    }
+    
     if (file_exists($distFile)) {
         // Set proper MIME types
         $ext = strtolower(pathinfo($distFile, PATHINFO_EXTENSION));
@@ -108,7 +129,9 @@ if (preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i', $re
 }
 
 // If the file exists in dist, serve it
-if ($requestPath !== '/' && file_exists(__DIR__ . '/dist' . $requestPath)) {
+$normalizedPath = ltrim($requestPath, '/');
+$distFileCheck = __DIR__ . '/dist/' . $normalizedPath;
+if ($requestPath !== '/' && $requestPath !== '' && file_exists($distFileCheck)) {
     return false; // Let Apache handle it
 }
 

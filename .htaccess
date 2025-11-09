@@ -3,36 +3,45 @@
   RewriteBase /
   
   # CRITICAL: Serve assets from dist/assets FIRST - before anything else
-  RewriteCond %{REQUEST_URI} ^/assets/
+  # Handle both /assets/ and assets/ paths
+  # Try absolute path first
+  RewriteCond %{REQUEST_URI} ^/?assets/
   RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
   RewriteRule ^assets/(.*)$ /dist/assets/$1 [L]
   
+  # Try relative path (if dist is in current directory)
+  RewriteCond %{REQUEST_URI} ^/?assets/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+  RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
+  RewriteRule ^assets/(.*)$ dist/assets/$1 [L]
+  
   # Serve favicon from dist
-  RewriteCond %{REQUEST_URI} ^/favicon\.(svg|ico|png)$
+  RewriteCond %{REQUEST_URI} ^/?favicon\.(svg|ico|png)$
   RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
   RewriteRule ^favicon\.(svg|ico|png)$ /dist/favicon.$1 [L]
   
-  # Serve actual files that exist (don't rewrite)
+  # Serve actual files that exist in root (don't rewrite)
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
   
-  # Serve other static files from dist
+  # Serve files from dist if they exist
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
   RewriteRule ^(.*)$ /dist/$1 [L]
   
   # For React Router - serve index.html for all other routes (but NOT for assets)
-  RewriteCond %{REQUEST_URI} !^/assets/
+  RewriteCond %{REQUEST_URI} !^/?assets/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
   RewriteRule ^(.*)$ /dist/index.html [L]
   
   # Fallback to index.php (but NOT for assets)
-  RewriteCond %{REQUEST_URI} !^/assets/
+  RewriteCond %{REQUEST_URI} !^/?assets/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ /index.php [L]
+  RewriteRule ^(.*)$ index.php [L]
 </IfModule>
 
 # Force correct MIME types for JavaScript and CSS
