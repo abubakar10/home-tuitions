@@ -8,9 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
 dist-ssr
 *.local
+
+# Keep dist folder for Hostinger deployment
+!dist
+!dist/**
 
 # Keep .htaccess and deployment files for Hostinger
 !.htaccess
